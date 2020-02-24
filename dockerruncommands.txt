@@ -1,0 +1,2 @@
+docker build -t tema14/calcws .
+docker run -p 8080:8080 tema14/calcws
