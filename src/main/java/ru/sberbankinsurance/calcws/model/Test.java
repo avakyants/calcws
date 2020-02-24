@@ -1,4 +1,4 @@
-package ru.sberbankinsurance.calcws;
+package ru.sberbankinsurance.calcws.model;
 
 public class Test  {
 

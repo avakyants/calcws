@@ -1,4 +1,4 @@
-package ru.sberbankinsurance.calcws;
+package ru.sberbankinsurance.calcws.config;
 
 import org.springframework.boot.DefaultApplicationArguments;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

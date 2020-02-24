@@ -1,8 +1,7 @@
-package ru.sberbankinsurance.calcws;
+package ru.sberbankinsurance.calcws.calc;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -14,6 +13,7 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.stereotype.Component;
+import ru.sberbankinsurance.calcws.model.Test;
 
 
 @Component

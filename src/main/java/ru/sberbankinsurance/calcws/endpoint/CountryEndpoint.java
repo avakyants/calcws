@@ -11,9 +11,9 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import ru.sberbankinsurance.calcws.CountryRepository;
-import ru.sberbankinsurance.calcws.Calc;
-import ru.sberbankinsurance.calcws.Test;
+import ru.sberbankinsurance.calcws.calc.CountryRepository;
+import ru.sberbankinsurance.calcws.calc.Calc;
+import ru.sberbankinsurance.calcws.model.Test;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
