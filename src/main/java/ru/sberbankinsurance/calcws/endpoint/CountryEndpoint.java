@@ -33,7 +33,9 @@ public class CountryEndpoint {
     @PostConstruct
     private void init(){
         try {
+            long startTime = System.currentTimeMillis();
             Calc.init(this.xlsxFile);
+            log.info("Calc.init() done in "+(System.currentTimeMillis()-startTime)+" ms");
         }catch (IOException e){
             log.error(e.getMessage());
         }
@@ -46,7 +48,9 @@ public class CountryEndpoint {
         int rnd = new Random().nextInt((69 - 18) + 1) + 18;
         System.out.println(rnd);
         try {
+            long startTime = System.currentTimeMillis();
             Test test = Calc.readFromExcel(rnd);
+            log.info("Calc.readFromExcel() done in "+(System.currentTimeMillis()-startTime)+" ms");
             log.info(rnd+" with content "+test.getContent());
         } catch (IOException e) {
             log.error(e.getMessage());
