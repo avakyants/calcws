@@ -31,7 +31,10 @@ build/
 ### VS Code ###
 .vscode/
 /test.xlsx
+/calc*.xlsx
+*.xlsx
 .mvn
+*.docx
 
 ### Logs ###
 *.log

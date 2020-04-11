@@ -5,6 +5,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
+@PropertySource("classpath:getfamilyactivebatchv2request.properties")
 public class CalcWSConfig extends WsConfigurerAdapter {
 
     @Bean
@@ -25,12 +27,12 @@ public class CalcWSConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
-    @Bean(name="countries")
+    @Bean(name="familyactive")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema){
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("CountriesPort");
+        wsdl11Definition.setPortTypeName("FamilyActivePort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+        wsdl11Definition.setTargetNamespace("https://calc-pfp.sberbank-insurance.ru/ws/xsd");
         wsdl11Definition.setSchema(countriesSchema);
         return wsdl11Definition;
     }

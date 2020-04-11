@@ -1,36 +1,68 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
-           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="https://calc-pfp.sberbank-insurance.ru/ws/xsd"
+           targetNamespace="https://calc-pfp.sberbank-insurance.ru/ws/xsd">
 
-    <xs:element name="getCountryRequest">
+    <xs:element name="key">
+        <xs:simpleType>
+            <xs:union>
+                <xs:simpleType>
+                    <xs:restriction base='xs:string' />
+                </xs:simpleType>
+                <xs:simpleType>
+                    <xs:restriction base='xs:integer' />
+                </xs:simpleType>
+            </xs:union>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="value">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="tns:item" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="item">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
+                <xs:element ref="tns:key"/>
+                <xs:element ref="tns:value"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="return">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:item" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getFamilyActiveBatchV2Response">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:return"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getCountryResponse">
+
+    <xs:element name="getFamilyActiveBatchV2">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="country" type="tns:country"/>
+                <xs:element name="age" type="xs:int"/>
+                <xs:element name="gender">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="М"/>
+                            <xs:enumeration value="Ж"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element type="xs:int" name="time"/>
+                <xs:element type="xs:int" name="payment"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="country">
-        <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="population" type="xs:int"/>
-            <xs:element name="capital" type="xs:string"/>
-            <xs:element name="currency" type="tns:currency"/>
-        </xs:sequence>
-    </xs:complexType>
 
-    <xs:simpleType name="currency">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="GBP"/>
-            <xs:enumeration value="EUR"/>
-            <xs:enumeration value="PLN"/>
-        </xs:restriction>
-    </xs:simpleType>
 </xs:schema>
