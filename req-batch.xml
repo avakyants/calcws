@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="https://calc-pfp.sberbank-insurance.ru/ws/xsd">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <soap:getFamilyActiveBatchV2>
+            <soap:age xsi:type="xsd:int">30</soap:age>
+            <soap:gender xsi:type="xsd:string">М</soap:gender>
+            <soap:time xsi:type="xsd:int">10</soap:time>
+            <soap:payment xsi:type="xsd:int">50000</soap:payment>
+        </soap:getFamilyActiveBatchV2>
+    </soapenv:Body>
+</soapenv:Envelope>

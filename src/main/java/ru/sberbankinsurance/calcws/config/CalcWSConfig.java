@@ -28,17 +28,17 @@ public class CalcWSConfig extends WsConfigurerAdapter {
     }
 
     @Bean(name="familyactive")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema){
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema calcSchema){
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("FamilyActivePort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("https://calc-pfp.sberbank-insurance.ru/ws/xsd");
-        wsdl11Definition.setSchema(countriesSchema);
+        wsdl11Definition.setSchema(calcSchema);
         return wsdl11Definition;
     }
 
     @Bean
-    public XsdSchema countriesSchema(){
+    public XsdSchema calcSchema(){
         return new SimpleXsdSchema(new ClassPathResource("calc.xsd"));
     }
 

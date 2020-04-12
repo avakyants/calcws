@@ -1,13 +1,9 @@
 package ru.sberbankinsurance.calcws.calc;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
-import https.calc_pfp_sberbank_insurance_ru.ws.xsd.GetFamilyActiveBatchV2;
-import https.calc_pfp_sberbank_insurance_ru.ws.xsd.GetFamilyActiveBatchV2Response;
-import https.calc_pfp_sberbank_insurance_ru.ws.xsd.Item;
-import https.calc_pfp_sberbank_insurance_ru.ws.xsd.Return;
+import https.calc_pfp_sberbank_insurance_ru.ws.xsd.*;
+import https.calc_pfp_sberbank_insurance_ru.ws.xsd.Chart;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -21,12 +17,23 @@ public class CalcFA {
     public static final String CLIENT_INFO_SHEET = "Информация о клиенте";
     public static final String FA_CALC_SHEET = "СА_Расчет";
 
+    //some values
+    public static final String EXCL_RISK = "Исключить риск";
+    public static final String MAXS_GSS = "Максимальные ГСС";
+    public static final String MAX_GSS = "Максимальная ГСС";
+    public static final String MANUAL_GSS = "Ручной ввод ГСС";
+
     public static FileInputStream file;
     public static Workbook workbook;
 
     public static void init(String xlsxFile) throws IOException{
         file = new FileInputStream(new File(xlsxFile));
         workbook = new XSSFWorkbook(file);
+    }
+
+    public static void destroy() throws IOException {
+        workbook.close();
+        file.close();
     }
 
 
@@ -42,6 +49,7 @@ public class CalcFA {
 
         getCellByAddress(sheetCurrent,"E4").setCellValue("Премьер");// Канал продаж
         getCellByAddress(sheetCurrent,"E5").setCellValue(request.getGender());// Пол страхователя
+        getCellByAddress(sheetCurrent,"E6").setCellValue(request.getAge());// Пол страхователя
         getCellByAddress(sheetCurrent,"E7").setCellValue("Рубли");//валюта
 
         sheetCurrent = workbook.getSheet(FA_CALC_SHEET);
@@ -53,24 +61,25 @@ public class CalcFA {
         getCellByAddress(sheetCurrent, "D20").setCellValue("Рубли");// валюта
         getCellByAddress(sheetCurrent, "H28").setCellValue(request.getPayment());// Страховой взнос
         getCellByAddress(sheetCurrent, "L24").setCellValue("6.5%");// Ожидаемая доходность
+
         getCellByAddress(sheetCurrent, "H34").setCellValue(evaluateAndGet(getCellByAddress(sheetCurrent,"J28")));// ГСС
 
         // additional inputs
-        getCellByAddress(sheetCurrent, "L36").setCellValue("Ручной ввод ГСС");
+        getCellByAddress(sheetCurrent, "L36").setCellValue(MANUAL_GSS);
         getCellByAddress(sheetCurrent, "F36").setCellValue("Не включено");
-        getCellByAddress(sheetCurrent, "L42").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L44").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L46").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L48").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L50").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L52").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L54").setCellValue("Исключить риск");
+        getCellByAddress(sheetCurrent, "L42").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L44").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L46").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L48").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L50").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L52").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L54").setCellValue(EXCL_RISK);
     }
 
     public static void setInputParams2(GetFamilyActiveBatchV2 request){
         Sheet sheetCurrent = workbook.getSheet(FA_CALC_SHEET);
         // additional inputs
-        getCellByAddress(sheetCurrent, "L36").setCellValue("Максимальные ГСС");
+        getCellByAddress(sheetCurrent, "L36").setCellValue(MAXS_GSS);
         getCellByAddress(sheetCurrent, "F36").setCellValue("Не включено");
     }
 
@@ -78,17 +87,85 @@ public class CalcFA {
         Sheet sheetCurrent = workbook.getSheet(FA_CALC_SHEET);
         // additional inputs
         getCellByAddress(sheetCurrent, "F36").setCellValue("x1");
-        getCellByAddress(sheetCurrent, "L36").setCellValue("Ручной ввод ГСС");
-        getCellByAddress(sheetCurrent, "L42").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L44").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L46").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L48").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L50").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L52").setCellValue("Исключить риск");
-        getCellByAddress(sheetCurrent, "L54").setCellValue("Исключить риск");
+        getCellByAddress(sheetCurrent, "L36").setCellValue(MANUAL_GSS);
+        getCellByAddress(sheetCurrent, "L42").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L44").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L46").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L48").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L50").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L52").setCellValue(EXCL_RISK);
+        getCellByAddress(sheetCurrent, "L54").setCellValue(EXCL_RISK);
+    }
+
+    public static void setInputParamsDetail(GetFamilyActiveBatchDetail request){
+        Sheet sheetCurrent = workbook.getSheet(CLIENT_INFO_SHEET);
+
+        getCellByAddress(sheetCurrent,"E4").setCellValue("Премьер");// Канал продаж
+        getCellByAddress(sheetCurrent,"E5").setCellValue(request.getOptions().getGender());// Пол страхователя
+        getCellByAddress(sheetCurrent,"E6").setCellValue(request.getOptions().getAge());// Возраст страхователя
+        getCellByAddress(sheetCurrent,"E7").setCellValue("Рубли");//валюта
+
+        sheetCurrent = workbook.getSheet(FA_CALC_SHEET);
+
+        getCellByAddress(sheetCurrent, "D8").setCellValue(request.getOptions().getGender());// Пол страхователя
+        getCellByAddress(sheetCurrent, "D10").setCellValue(request.getOptions().getAge());// Возраст Страхователя
+        getCellByAddress(sheetCurrent, "D16").setCellValue(request.getOptions().getTime());// Срок страхования
+        getCellByAddress(sheetCurrent, "D18").setCellValue("Ежегодно");// Периодичность уплаты взносов
+        getCellByAddress(sheetCurrent, "D20").setCellValue("Рубли");// валюта
+        getCellByAddress(sheetCurrent, "L24").setCellValue("6.5%");// Ожидаемая доходность
+        getCellByAddress(sheetCurrent, "H28").setCellValue(((request.getOptions().getPaymentType().equals("взнос"))?request.getOptions().getPayment():50000.0f));// Страховой взнос
+        getCellByAddress(sheetCurrent, "H34").setCellValue(((request.getOptions().getPaymentType().equals("сумма"))?request.getOptions().getPayment():1.0f));// ГСС
+        getCellByAddress(sheetCurrent, "F36").setCellValue(((request.getOptions().getRaider().equalsIgnoreCase("Нет"))?"Не включено":request.getOptions().getRaider()));
+
+        if(request.getOptions().getPaymentType().equals("взнос")){
+            getCellByAddress(sheetCurrent, "H34").setCellValue(evaluateAndGet(getCellByAddress(sheetCurrent,"J28")));
+        }else if(request.getOptions().getPaymentType().equals("сумма")){
+            getCellByAddress(sheetCurrent, "H28").setCellValue(evaluateAndGet(getCellByAddress(sheetCurrent,"J34")));
+        }
+
+        getCellByAddress(sheetCurrent, "L36").setCellValue(MANUAL_GSS);
+
+
+        if(request.getRisks().getSpecialDiseases()==1)
+            getCellByAddress(sheetCurrent, "L42").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L42").setCellValue(EXCL_RISK);
+
+        evaluateAndGet(getCellByAddress(sheetCurrent,"L42"));
+
+        if(request.getRisks().getCareAccident()==1)
+            getCellByAddress(sheetCurrent, "L44").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L44").setCellValue(EXCL_RISK);
+
+        if(request.getRisks().getCareTransport()==1)
+            getCellByAddress(sheetCurrent, "L46").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L46").setCellValue(EXCL_RISK);
+
+        if(request.getRisks().getDisability()==1)
+            getCellByAddress(sheetCurrent, "L48").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L48").setCellValue(EXCL_RISK);
+
+        if(request.getRisks().getInjuryAccident()==1)
+            getCellByAddress(sheetCurrent, "L50").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L50").setCellValue(EXCL_RISK);
+
+        if(request.getRisks().getHospitalization()==1)
+            getCellByAddress(sheetCurrent, "L52").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L52").setCellValue(EXCL_RISK);
+
+        if(request.getRisks().getSurgeryAccident()==1)
+            getCellByAddress(sheetCurrent, "L54").setCellValue(MAX_GSS);
+        else
+            getCellByAddress(sheetCurrent, "L54").setCellValue(EXCL_RISK);
     }
 
     public static double evaluateAndGet(Cell cell){
+
         FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 
         if (cell.getCellType() == CellType.FORMULA) {
@@ -100,23 +177,30 @@ public class CalcFA {
                 case NUMERIC:
                     return cell.getNumericCellValue();
             }
+        }else if(cell.getCellType() == CellType.NUMERIC){
+            return cell.getNumericCellValue();
         }
-        return 0.0d;
+        return -1.0d;
     }
 
     public static Item getItem(String k, Object v){
         Item i = new Item();
         https.calc_pfp_sberbank_insurance_ru.ws.xsd.Value val = new https.calc_pfp_sberbank_insurance_ru.ws.xsd.Value();
         val.getContent().add(v);
-
         i.setKey(k);
         i.setValue(val);
-
         return i;
-
     }
 
-    public static GetFamilyActiveBatchV2Response calcExcel(GetFamilyActiveBatchV2 request) throws IOException {
+    public static Item getRiskItem(String name, double sum, double payment){
+        Item i = new Item();
+        i.setName(name);
+        i.setSum(Double.valueOf(sum).floatValue());
+        i.setPayment(Double.valueOf(payment).floatValue());
+        return i;
+    }
+
+    public static GetFamilyActiveBatchV2Response calc(GetFamilyActiveBatchV2 request) throws IOException {
 
         /*SET INPUTS*/
         setInputParams1(request);
@@ -124,8 +208,6 @@ public class CalcFA {
         //SET RESPONSE
         GetFamilyActiveBatchV2Response response = new GetFamilyActiveBatchV2Response();
         Return r = new Return();
-
-
 
         /* KEY=1*/
         Item i = new Item();
@@ -227,10 +309,75 @@ public class CalcFA {
 
 
         response.setReturn(r);
-
-        workbook.close();
-
         return response;
+    }
+
+
+    public static GetFamilyActiveBatchDetailResponse calcDetail(GetFamilyActiveBatchDetail request) throws IOException {
+
+        /*SET INPUTS*/
+        setInputParamsDetail(request);
+
+        GetFamilyActiveBatchDetailResponse response = new GetFamilyActiveBatchDetailResponse();
+        Return r = new Return();
+
+        r.setSum(Double.valueOf(evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J28"))).floatValue());
+        r.setPayment(Double.valueOf(evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J58"))).floatValue());
+        r.setRaider(String.format("%.11f", Double.valueOf(evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J36"))).floatValue()));
+        r.setRelease(Double.valueOf(evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J56"))).intValue());
+
+        //Risks
+        Risks risks = new Risks();
+
+        risks.getItem().add(getRiskItem("special_diseases",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H42")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J42"))));
+
+        risks.getItem().add(getRiskItem("care_accident",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H44")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J44"))));
+
+        risks.getItem().add(getRiskItem("care_transport",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H46")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J46"))));
+
+        risks.getItem().add(getRiskItem("disability",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H48")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J48"))));
+
+        risks.getItem().add(getRiskItem("injury_accident",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H50")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J50"))));
+
+        risks.getItem().add(getRiskItem("hospitalization",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H52")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J52"))));
+
+        risks.getItem().add(getRiskItem("surgery_accident",
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"H54")),
+                evaluateAndGet(getCellByAddress(workbook.getSheet(FA_CALC_SHEET),"J54"))));
+
+        r.setRisks(risks);
+
+        //chart
+
+        if(request.getOptions().getTime()>0){
+            Chart chart = new Chart();
+            for (int g=0;g<request.getOptions().getTime();g++){
+                chart.getItem().add((getItem(String.valueOf(g+1),String.format("%.11f", getCellByAddress(workbook.getSheet(FA_OFFER_SHEET),"F"+(g+90)).getNumericCellValue()))));
+            }
+
+            r.setChart(chart);
+        }
+
+        response.setReturn(r);
+        return response;
+    }
+
+    public static void saveWorkBookToFile(String filename) throws IOException{
+        try(FileOutputStream out = new FileOutputStream(filename)){
+            workbook.write(out);
+        }
     }
 
 

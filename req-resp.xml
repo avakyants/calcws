@@ -1,0 +1,353 @@
+<some>
+    <getFamilyActiveBatchV2>
+        <age>36</age>
+        <gender>ж</gender>
+        <time>5</time>
+        <payment>50000</payment>
+    </getFamilyActiveBatchV2>
+
+    <getFamilyActiveBatchDetail>
+        <options>
+            <age >36</age>
+            <time >5</time>
+            <gender >ж</gender>
+            <payment_type >взнос</payment_type>
+            <payment >50000</payment>
+            <frequency >ежеквартально</frequency>
+            <currency >рубли</currency>
+            <raider >нет</raider>
+        </options>
+        <risks>
+            <special_diseases >1</special_diseases>
+            <care_accident >1</care_accident>
+            <care_transport >1</care_transport>
+            <disability >1</disability>
+            <injury_accident >1</injury_accident>
+            <surgery_accident >0</surgery_accident>
+            <hospitalization >0</hospitalization>
+        </risks>
+    </getFamilyActiveBatchDetail>
+
+
+    <getFamilyActiveBatchDetailResponse>
+    <return>
+        <sum>219287</sum>
+        <payment>24215</payment>
+        <capital>234364</capital>
+        <release>42.59516154</release>
+        <risks>
+            <item>
+                <name>special_diseases</name>
+                <sum>219286</sum>
+                <payment>348.40299553847</payment>
+            </item>
+            <item>
+                <name>care_accident</name>
+                <sum>219286</sum>
+                <payment>167.75414672991</payment>
+            </item>
+            <item>
+                <name>care_transport</name>
+                <sum>219286</sum>
+                <payment>55.918048909972</payment>
+            </item>
+            <item>
+                <name>disability</name>
+                <sum>219286</sum>
+                <payment>223.67219563989</payment>
+            </item>
+            <item>
+                <name>injury_accident</name>
+                <sum>219286</sum>
+                <payment>447.34439127977</payment>
+            </item>
+        </risks>
+        <chart>
+            <item>
+                <key>1</key>
+                <value>26197.56</value>
+            </item>
+            <item>
+                <key>2</key>
+                <value>52395.12</value>
+            </item>
+            <item>
+                <key>3</key>
+                <value>78592.68</value>
+            </item>
+            <item>
+                <key>4</key>
+                <value>104790.24</value>
+            </item>
+            <item>
+                <key>5</key>
+                <value>130987.8</value>
+            </item>
+        </chart>
+    </return>
+</getFamilyActiveBatchDetailResponse>
+
+
+<getFamilyActiveBatchV2Response>
+<return>
+    <item>
+        <key>1</key>
+        <value>
+            <item>
+                <key>sum</key>
+                <value>2997069</value>
+            </item>
+            <item>
+                <key>payment</key>
+                <value>299241</value>
+            </item>
+            <item>
+                <key >raider</key>
+                <value >0</value>
+            </item>
+            <item>
+                <key >release</key>
+                <value >759.2641893</value>
+            </item>
+            <item>
+                <key >riskSum</key>
+                <value >0</value>
+            </item>
+            <item>
+                <key >chart</key>
+                <value >
+                    <item>
+                        <key >1</key>
+                        <value >324000</value>
+                    </item>
+                    <item>
+                        <key >2</key>
+                        <value >648000</value>
+                    </item>
+                    <item>
+                        <key >3</key>
+                        <value >972000</value>
+                    </item>
+                    <item>
+                        <key >4</key>
+                        <value >1296000</value>
+                    </item>
+                    <item>
+                        <key >5</key>
+                        <value >1620000</value>
+                    </item>
+                    <item>
+                        <key >6</key>
+                        <value >1944000</value>
+                    </item>
+                    <item>
+                        <key >7</key>
+                        <value >2268000</value>
+                    </item>
+                    <item>
+                        <key >8</key>
+                        <value >2592000</value>
+                    </item>
+                    <item>
+                        <key >9</key>
+                        <value >2916000</value>
+                    </item>
+                    <item>
+                        <key >10</key>
+                        <value >2997069</value>
+                    </item>
+                </value>
+            </item>
+        </value>
+    </item>
+    <item>
+        <key >2</key>
+        <value >
+            <item>
+                <key >sum</key>
+                <value >2651242</value>
+            </item>
+            <item>
+                <key >payment</key>
+                <value >264712</value>
+            </item>
+            <item>
+                <key >raider</key>
+                <value >0</value>
+            </item>
+            <item>
+                <key >release</key>
+                <value >759.2641893</value>
+            </item>
+            <item>
+                <key >riskSum</key>
+                <value >34528.898965322</value>
+            </item>
+            <item>
+                <key >special_diseases_sum</key>
+                <value >2651241</value>
+            </item>
+            <item>
+                <key >special_diseases</key>
+                <value >5365.2385978109</value>
+            </item>
+            <item>
+                <key >care_accident_sum</key>
+                <value >2651241</value>
+            </item>
+            <item>
+                <key >care_accident</key>
+                <value >3976.8627773878</value>
+            </item>
+            <item>
+                <key >care_transport_sum</key>
+                <value >2651241.8515919</value>
+            </item>
+            <item>
+                <key >care_transport</key>
+                <value >1325.6209257959</value>
+            </item>
+            <item>
+                <key >disability_sum</key>
+                <value >2651241</value>
+            </item>
+            <item>
+                <key >disability</key>
+                <value >5302.4837031837</value>
+            </item>
+            <item>
+                <key >injury_accident_sum</key>
+                <value >2651241</value>
+            </item>
+            <item>
+                <key >injury_accident</key>
+                <value >10604.967406367</value>
+            </item>
+            <item>
+                <key >surgery_accident_sum</key>
+                <value >2651241.8515919</value>
+            </item>
+            <item>
+                <key >surgery_accident</key>
+                <value >7953.7255547756</value>
+            </item>
+            <item>
+                <key >chart</key>
+                <value >
+                    <item>
+                        <key >1</key>
+                        <value >286708.68</value>
+                    </item>
+                    <item>
+                        <key >2</key>
+                        <value >573417.36</value>
+                    </item>
+                    <item>
+                        <key >3</key>
+                        <value >860126.04</value>
+                    </item>
+                    <item>
+                        <key >4</key>
+                        <value >1146834.72</value>
+                    </item>
+                    <item>
+                        <key >5</key>
+                        <value >1433543.4</value>
+                    </item>
+                    <item>
+                        <key >6</key>
+                        <value >1720252.08</value>
+                    </item>
+                    <item>
+                        <key >7</key>
+                        <value >2006960.76</value>
+                    </item>
+                    <item>
+                        <key >8</key>
+                        <value >2293669.44</value>
+                    </item>
+                    <item>
+                        <key >9</key>
+                        <value >2580378.12</value>
+                    </item>
+                    <item>
+                        <key >10</key>
+                        <value >2651242</value>
+                    </item>
+                </value>
+            </item>
+        </value>
+    </item>
+    <item>
+        <key >3</key>
+        <value >
+            <item>
+                <key >sum</key>
+                <value >2889799</value>
+            </item>
+            <item>
+                <key >payment</key>
+                <value >288530</value>
+            </item>
+            <item>
+                <key >raider</key>
+                <value >10710</value>
+            </item>
+            <item>
+                <key >release</key>
+                <value >759.261652</value>
+            </item>
+            <item>
+                <key >riskSum</key>
+                <value >0</value>
+            </item>
+            <item>
+                <key >chart</key>
+                <value >
+                    <item>
+                        <key >1</key>
+                        <value >324000</value>
+                    </item>
+                    <item>
+                        <key >2</key>
+                        <value >648000</value>
+                    </item>
+                    <item>
+                        <key >3</key>
+                        <value >972000</value>
+                    </item>
+                    <item>
+                        <key >4</key>
+                        <value >1296000</value>
+                    </item>
+                    <item>
+                        <key >5</key>
+                        <value >1620000</value>
+                    </item>
+                    <item>
+                        <key >6</key>
+                        <value >1944000</value>
+                    </item>
+                    <item>
+                        <key >7</key>
+                        <value >2268000</value>
+                    </item>
+                    <item>
+                        <key >8</key>
+                        <value >2592000</value>
+                    </item>
+                    <item>
+                        <key >9</key>
+                        <value >2916000</value>
+                    </item>
+                    <item>
+                        <key >10</key>
+                        <value >3240000</value>
+                    </item>
+                </value>
+            </item>
+        </value>
+    </item>
+</return>
+</getFamilyActiveBatchV2Response>
+</some>

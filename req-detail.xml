@@ -1,0 +1,26 @@
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="https://calc-pfp.sberbank-insurance.ru/ws/xsd">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <soap:getFamilyActiveBatchDetail>
+            <soap:options>
+                <soap:age xsi:type="xsd:int">36</soap:age>
+                <soap:time xsi:type="xsd:int">5</soap:time>
+                <soap:gender xsi:type="xsd:string">ж</soap:gender>
+                <soap:payment_type xsi:type="xsd:string">взнос</soap:payment_type>
+                <soap:payment xsi:type="xsd:int">50000</soap:payment>
+                <soap:frequency xsi:type="xsd:string">ежеквартально</soap:frequency>
+                <soap:currency xsi:type="xsd:string">рубли</soap:currency>
+                <soap:raider xsi:type="xsd:string">нет</soap:raider>
+            </soap:options>
+            <soap:risks>
+                <soap:special_diseases xsi:type="xsd:boolean">1</soap:special_diseases>
+                <soap:care_accident xsi:type="xsd:boolean">1</soap:care_accident>
+                <soap:care_transport xsi:type="xsd:boolean">1</soap:care_transport>
+                <soap:disability xsi:type="xsd:boolean">1</soap:disability>
+                <soap:injury_accident xsi:type="xsd:boolean">1</soap:injury_accident>
+                <soap:surgery_accident xsi:type="xsd:boolean">0</soap:surgery_accident>
+                <soap:hospitalization xsi:type="xsd:boolean">0</soap:hospitalization>
+            </soap:risks>
+        </soap:getFamilyActiveBatchDetail>
+    </soapenv:Body>
+</soapenv:Envelope>

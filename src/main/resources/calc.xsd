@@ -2,6 +2,69 @@
            xmlns:tns="https://calc-pfp.sberbank-insurance.ru/ws/xsd"
            targetNamespace="https://calc-pfp.sberbank-insurance.ru/ws/xsd">
 
+    <xs:element name="age" type="xs:int"/>
+    <xs:element name="gender">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="М"/>
+                <xs:enumeration value="Ж"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="time" type="xs:int"/>
+    <xs:element name="payment" type="xs:float"/>
+    <xs:element name="payment_type" type="xs:string"/>
+    <xs:element name="frequency" type="xs:string"/>
+    <xs:element name="currency" type="xs:string"/>
+    <xs:element name="raider">
+        <xs:simpleType>
+            <xs:union>
+                <xs:simpleType>
+                    <xs:restriction base='xs:string' />
+                </xs:simpleType>
+                <xs:simpleType>
+                    <xs:restriction base='xs:float' />
+                </xs:simpleType>
+            </xs:union>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="special_diseases" type="xs:int"/>
+    <xs:element name="care_accident" type="xs:int"/>
+    <xs:element name="care_transport" type="xs:int"/>
+    <xs:element name="disability" type="xs:int"/>
+    <xs:element name="injury_accident" type="xs:int"/>
+    <xs:element name="surgery_accident" type="xs:int"/>
+    <xs:element name="hospitalization" type="xs:int"/>
+    <xs:element name="options">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:age"/>
+                <xs:element ref="tns:time"/>
+                <xs:element ref="tns:gender"/>
+                <xs:element ref="tns:payment_type"/>
+                <xs:element ref="tns:payment"/>
+                <xs:element ref="tns:frequency"/>
+                <xs:element ref="tns:currency"/>
+                <xs:element ref="tns:raider"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="risks">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:special_diseases" minOccurs="0"/>
+                <xs:element ref="tns:care_accident" minOccurs="0"/>
+                <xs:element ref="tns:care_transport" minOccurs="0"/>
+                <xs:element ref="tns:disability" minOccurs="0"/>
+                <xs:element ref="tns:injury_accident" minOccurs="0"/>
+                <xs:element ref="tns:surgery_accident" minOccurs="0"/>
+                <xs:element ref="tns:hospitalization" minOccurs="0"/>
+                <xs:element ref="tns:item" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="sum" type="xs:float"/>
     <xs:element name="key">
         <xs:simpleType>
             <xs:union>
@@ -15,6 +78,18 @@
         </xs:simpleType>
     </xs:element>
 
+    <xs:element name="item">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:name" minOccurs="0"/>
+                <xs:element ref="tns:sum" minOccurs="0"/>
+                <xs:element ref="tns:payment" minOccurs="0"/>
+                <xs:element ref="tns:key" minOccurs="0"/>
+                <xs:element ref="tns:value" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="value">
         <xs:complexType mixed="true">
             <xs:sequence>
@@ -22,21 +97,30 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="item">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="tns:key"/>
-                <xs:element ref="tns:value"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="return">
+
+    <xs:element name="release" type="xs:int"/>
+    <xs:element name="chart">
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="tns:item" maxOccurs="unbounded" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="return">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:sum" minOccurs="0"/>
+                <xs:element ref="tns:raider" minOccurs="0"/>
+                <xs:element ref="tns:payment" minOccurs="0"/>
+                <xs:element ref="tns:release" minOccurs="0"/>
+                <xs:element ref="tns:risks" minOccurs="0"/>
+                <xs:element ref="tns:chart" minOccurs="0"/>
+                <xs:element ref="tns:item" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
     <xs:element name="getFamilyActiveBatchV2Response">
         <xs:complexType>
             <xs:sequence>
@@ -49,20 +133,30 @@
     <xs:element name="getFamilyActiveBatchV2">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="age" type="xs:int"/>
-                <xs:element name="gender">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="М"/>
-                            <xs:enumeration value="Ж"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element type="xs:int" name="time"/>
-                <xs:element type="xs:int" name="payment"/>
+                <xs:element ref="tns:age"/>
+                <xs:element ref="tns:gender"/>
+                <xs:element ref="tns:time"/>
+                <xs:element ref="tns:payment"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
+
+    <xs:element name="getFamilyActiveBatchDetail">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:options"/>
+                <xs:element ref="tns:risks"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFamilyActiveBatchDetailResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:return"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>

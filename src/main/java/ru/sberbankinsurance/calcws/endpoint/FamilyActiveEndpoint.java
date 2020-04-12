@@ -11,6 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import ru.sberbankinsurance.calcws.calc.CalcFA;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.IOException;
 
 @Endpoint
@@ -36,6 +37,17 @@ public class FamilyActiveEndpoint {
 
     }
 
+    @PreDestroy
+    public void destroy() {
+        try {
+            long startTime = System.currentTimeMillis();
+            CalcFA.destroy();
+            log.info("Calc.destroy() done in "+(System.currentTimeMillis()-startTime)+" ms");
+        }catch (IOException e){
+            log.error(e.getMessage());
+        }
+    }
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFamilyActiveBatchV2")
     @ResponsePayload
     public GetFamilyActiveBatchV2Response getFamilyActiveBatchV2(@RequestPayload GetFamilyActiveBatchV2 request){
@@ -44,14 +56,29 @@ public class FamilyActiveEndpoint {
 
         try {
             long startTime = System.currentTimeMillis();
-            response = CalcFA.calcExcel(request);
-            log.info("Calc.readFromExcel() done in "+(System.currentTimeMillis()-startTime)+" ms");
+            response = CalcFA.calc(request);
+            log.info("CalcFA.calc() done in "+(System.currentTimeMillis()-startTime)+" ms");
 
         } catch (IOException e) {
             log.error(e.getMessage());
         }
 
 
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFamilyActiveBatchDetail")
+    @ResponsePayload
+    public GetFamilyActiveBatchDetailResponse getFamilyActiveBatchDetailResponse(@RequestPayload GetFamilyActiveBatchDetail request){
+        GetFamilyActiveBatchDetailResponse response = null;
+        try {
+            long startTime = System.currentTimeMillis();
+            response = CalcFA.calcDetail(request);
+            log.info("CalcFA.calcDetail() done in "+(System.currentTimeMillis()-startTime)+" ms");
+
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
         return response;
     }
 
