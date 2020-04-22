@@ -39,3 +39,7 @@ build/
 ### Logs ###
 *.log
 .DS_Store
+
+### Cert ###
+*.p12
+*.jks

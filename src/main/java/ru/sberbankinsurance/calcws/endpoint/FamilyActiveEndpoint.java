@@ -52,16 +52,10 @@ public class FamilyActiveEndpoint {
     @ResponsePayload
     public GetFamilyActiveBatchV2Response getFamilyActiveBatchV2(@RequestPayload GetFamilyActiveBatchV2 request){
 
-        GetFamilyActiveBatchV2Response response = null;
-
-        try {
-            long startTime = System.currentTimeMillis();
-            response = CalcFA.calc(request);
-            log.info("CalcFA.calc() done in "+(System.currentTimeMillis()-startTime)+" ms");
-
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
+        GetFamilyActiveBatchV2Response response;
+        long startTime = System.currentTimeMillis();
+        response = CalcFA.calc(request);
+        log.info("CalcFA.calc() done in "+(System.currentTimeMillis()-startTime)+" ms");
 
 
         return response;
@@ -70,15 +64,10 @@ public class FamilyActiveEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFamilyActiveBatchDetail")
     @ResponsePayload
     public GetFamilyActiveBatchDetailResponse getFamilyActiveBatchDetailResponse(@RequestPayload GetFamilyActiveBatchDetail request){
-        GetFamilyActiveBatchDetailResponse response = null;
-        try {
-            long startTime = System.currentTimeMillis();
-            response = CalcFA.calcDetail(request);
-            log.info("CalcFA.calcDetail() done in "+(System.currentTimeMillis()-startTime)+" ms");
-
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
+        GetFamilyActiveBatchDetailResponse response;
+        long startTime = System.currentTimeMillis();
+        response = CalcFA.calcDetail(request);
+        log.info("CalcFA.calcDetail() done in "+(System.currentTimeMillis()-startTime)+" ms");
         return response;
     }
 
